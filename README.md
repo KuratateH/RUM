@@ -1,4 +1,4 @@
-# RUM-README.md
+# RUM
 [![License](https://img.shields.io/badge/License-CC--BY--4.0-green.svg)](https://github.com/KuratateH/RUM-README.md\_flows/blob/main/LICENSE)
 
 [![Version](https://img.shields.io/badge/Version-1.0.4-green.svg)](https://github.com/tamada/developing\_flows/releases/tag/v1.0.4)
