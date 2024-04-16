@@ -30,6 +30,12 @@ ARGUMENTS
                 Otherwise, it will archive the files.
 ```
 
+## Install
+
+```sh
+brew install 
+```
+
 ## the Logo and the Origin of RUM
 
 The general word, totebag, is a bag for carrying things.
