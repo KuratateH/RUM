@@ -4,7 +4,7 @@ use std::fs::File;
 use std::path::Path;
 
 include!("src/cli.rs");
-
+coust APP_NAME: &sr = "RUM";
 fn generate(s: Shell, app: &mut Command, outdir: &Path, file: &str) {
     let destfile = outdir.join(file);
     println!("dest: {}", destfile.display());
