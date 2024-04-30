@@ -3,8 +3,7 @@
 [![Version](https://img.shields.io/badge/Version-1.0.0-green.svg)](https://github.com/tamada/developing\_flows/releases/tag/v1.0.4)
 <!--[![DOI](https://zenodo.org/badge/335323499.svg)](https://zenodo.org/badge/latestdoi/335323499)-->
 [![Coverage Status](https://coveralls.io/repos/github/KuratateH/RUM/badge.svg?branch=main)](https://coveralls.io/github/KuratateH/RUM?branch=main)
-https://rust-reportcard.xuri.me/badge/github.com/kuratateh/rum
-
+[![Rust Report Card](https://rust-reportcard.xuri.me/badge/github.com/kuratateh/rum)](https://rust-reportcard.xuri.me/report/github.com/kuratateh/rum)
 様々なフォーマットに対応した圧縮ツールです
 
 ## Description
