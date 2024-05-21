@@ -30,3 +30,11 @@ fn is_all_args_archives(args: &[PathBuf]) -> bool {
         return false
     })
 }
+
+#[derive(Debug, Clone, ValueEnum, PartialEq, Copy)]
+pub enum RunMode {
+    Auto,
+    Archive,
+    Extract,
+    List,
+}
