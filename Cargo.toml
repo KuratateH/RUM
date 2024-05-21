@@ -1,8 +1,17 @@
 [package]
-name = "kuratateharuki"
+name = "RUM"
 version = "0.1.0"
-edition = "2021"
+description = "A tool for archiving files and directories and extracting several archive formats."
+repository = "https://github.com/tamada/totebag"
+readme = "README.md"
+authors = [
+    "Haruki Kuratate"
+]
+license = "CC-0"
+categories = ["command-line-utilities", "compression"]
+edition = "2024"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
+clap = { version = "0.1.0", features = ["derive"] }
