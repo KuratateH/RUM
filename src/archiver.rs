@@ -6,7 +6,7 @@ use crate::archiver::rar::RarArchiver;
 use crate::archiver::sevenz::SevenZArchiver;
 use crate::archiver::tar::{TarArchiver, TarBz2Archiver, TarGzArchiver, TarXzArchiver, TarZstdArchiver};
 use crate::archiver::zip::ZipArchiver;
-use crate::cli::{Result, ToteError};
+use crate::cli::{Result, R_Error};
 use crate::format::{find_format, Format};
 use crate::verboser::{create_verboser, Verboser};
 use crate::CliOpts;
@@ -37,7 +37,7 @@ pub fn create_archiver(dest: &PathBuf) -> Result<Box<dyn Archiver>> {
                 Format::LHA => Ok(Box::new(LhaArchiver {})),
                 Format::Rar => Ok(Box::new(RarArchiver {})),
                 Format::SevenZ => Ok(Box::new(SevenZArchiver {})),
-                _ => Err(ToteError::UnknownFormat(format.to_string())),
+                _ => Err(R_Error::UnknownFormat(format.to_string())),
             }
         }
         Err(msg) => Err(msg),
@@ -111,18 +111,18 @@ impl ArchiverOpts {
         let p = self.dest.as_path();
         print!("{:?}: {}\n", p, p.exists());
         if p.is_file() && p.exists() && !self.overwrite {
-            return Err(ToteError::FileExists(self.dest.clone()));
+            return Err(R_Error::FileExists(self.dest.clone()));
         }
         if let Some(parent) = p.parent() {
             if !parent.exists() {
                 if let Err(e) = create_dir_all(parent) {
-                    return Err(ToteError::IOError(e));
+                    return Err(R_Error::IOError(e));
                 }
             }
         }
         match File::create(self.dest.as_path()) {
             Ok(f) => Ok(f),
-            Err(e) => Err(ToteError::IOError(e)),
+            Err(e) => Err(R_Error::IOError(e)),
         }
     }
 }
@@ -175,7 +175,7 @@ mod tests {
         let a10 = create_archiver(&PathBuf::from("results/test.unknown"));
         assert!(a10.is_err());
         if let Err(e) = a10 {
-            if let ToteError::UnknownFormat(msg) = e {
+            if let R_Error::UnknownFormat(msg) = e {
                 assert_eq!(msg, "test.unknown: unknown format".to_string());
             } else {
                 assert!(false);
