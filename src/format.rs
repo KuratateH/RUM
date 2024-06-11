@@ -1,7 +1,7 @@
 use std::ffi::OsStr;
 use std::fmt::Display;
 
-use crate::cli::{Result, ToteError};
+use crate::cli::{Result, R_Error};
 
 pub fn find_format(file_name: Option<&OsStr>) -> Result<Format> {
     match file_name {
@@ -29,7 +29,7 @@ pub fn find_format(file_name: Option<&OsStr>) -> Result<Format> {
                 return Ok(Format::Unknown(file_name.to_str().unwrap().to_string()));
             }
         }
-        None => Err(ToteError::NoArgumentsGiven),
+        None => Err(R_Error::NoArgumentsGiven),
     }
 }
 
@@ -103,7 +103,7 @@ mod tests {
             assert_eq!(f.to_string(), "SevenZ".to_string());
         }
         if let Err(e) = find_format(None) {
-            if let ToteError::NoArgumentsGiven = e {
+            if let R_Error::NoArgumentsGiven = e {
                 assert!(true);
             } else {
                 assert!(false);
