@@ -1,6 +1,6 @@
 use std::path::PathBuf;
 
-use crate::cli::{Result, ToteError};
+use crate::cli::{Result, R_Error};
 use crate::format::{find_format, Format};
 use crate::verboser::{create_verboser, Verboser};
 use crate::CliOpts;
@@ -66,7 +66,7 @@ pub fn create_extractor(file: &PathBuf) -> Result<Box<dyn Extractor>> {
                 Format::TarZstd => Ok(Box::new(tar::TarZstdExtractor {})),
                 Format::LHA => Ok(Box::new(lha::LhaExtractor {})),
                 Format::SevenZ => Ok(Box::new(sevenz::SevenZExtractor {})),
-                Format::Unknown(s) => Err(ToteError::UnknownFormat(format!(
+                Format::Unknown(s) => Err(R_Error::UnknownFormat(format!(
                     "{}: unsupported format",
                     s
                 ))),
@@ -146,7 +146,7 @@ mod tests {
 
         let e8 = create_extractor(&PathBuf::from("results/test.unknown"));
         assert!(e8.is_err());
-        if let Err(ToteError::UnknownFormat(msg)) = e8 {
+        if let Err(R_Error::UnknownFormat(msg)) = e8 {
             assert_eq!(msg, "test.unknown: unsupported format".to_string());
         } else {
             assert!(false);
