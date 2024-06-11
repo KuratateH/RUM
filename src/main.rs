@@ -1,7 +1,7 @@
 use archiver::{archiver_info, ArchiverOpts};
 use clap::Parser;
 use cli::*;
-use cli::{RunMode, ToteError};
+use cli::{RunMode, R_Error};
 use extractor::{extractor_info, ExtractorOpts};
 
 mod archiver;
@@ -24,7 +24,7 @@ mod tests {
     #[test]
     fn test_run() {
         let opts = CliOpts::parse_from(&[
-            "totebag_test",
+            "RUM_test",
             "-o",
             "test.zip",
             "src",
