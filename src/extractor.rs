@@ -4,6 +4,7 @@ use crate::cli::{Result, R_Error};
 use crate::format::{find_format, Format};
 use crate::verboser::{create_verboser, Verboser};
 use crate::CliOpts;
+//use crate::lha;
 
 mod lha;
 mod rar;
