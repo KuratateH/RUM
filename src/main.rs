@@ -66,7 +66,7 @@ fn perform_archive(opts: CliOpts) -> Result<()> {
             archiver.perform(&inout)
         }
         Err(e) => Err(e),
-    }
+    } 
 }
 
 fn main() -> Result<()> {
