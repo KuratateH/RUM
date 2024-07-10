@@ -16,7 +16,7 @@ fn perform(mut opts: CliOpts) -> Result<()> {
         Ok(RunMode::Extract) => return perform_extract(opts),
         Ok(RunMode::List) => return perform_list(opts),
         Ok(RunMode::Auto) => {
-            return Err(R_Error::Unknown(
+            return Err(RError::Unknown(
                 "cannot distinguish archiving and extracting".to_string(),
             ))
         }
@@ -44,7 +44,7 @@ fn perform_list(opts: CliOpts) -> Result<()> {
     let args = opts.args.clone();
     for arg in args.iter() {
         if !arg.exists() {
-            return Err(R_Error::FileNotFound(arg.to_path_buf()));
+            return Err(RError::FileNotFound(arg.to_path_buf()));
         }
         let extractor = extractor::create_extractor(&arg).unwrap();
         if args.len() > 1 {
@@ -74,21 +74,21 @@ fn main() -> Result<()> {
         Ok(_) => Ok(()),
         Err(e) => {
             match e {
-                R_Error::NoArgumentsGiven => {
+                RError::NoArgumentsGiven => {
                     println!("No arguments given. Use --help for usage.")
                 }
-                R_Error::FileNotFound(p) => println!("{}: file not found", p.to_str().unwrap()),
-                R_Error::FileExists(p) => {
+                RError::FileNotFound(p) => println!("{}: file not found", p.to_str().unwrap()),
+                RError::FileExists(p) => {
                     println!("{}: file already exists", p.to_str().unwrap())
                 }
-                R_Error::IO(e) => println!("IO error: {}", e),
-                R_Error::IOError(e) => println!("IO error: {}", e),
-                R_Error::Archiver(s) => println!("Archive error: {}", s),
-                R_Error::ArchiverError(s) => println!("Archive error: {}", s),
-                R_Error::UnknownFormat(f) => println!("{}: unknown format", f),
-                R_Error::UnsupportedFormat(f) => println!("{}: unsupported format", f),
-                R_Error::Fatal(e) => println!("Error: {}", e),
-                R_Error::Unknown(s) => println!("Unknown error: {}", s),
+                RError::IO(e) => println!("IO error: {}", e),
+                RError::IOError(e) => println!("IO error: {}", e),
+                RError::Archiver(s) => println!("Archive error: {}", s),
+                RError::ArchiverError(s) => println!("Archive error: {}", s),
+                RError::UnknownFormat(f) => println!("{}: unknown format", f),
+                RError::UnsupportedFormat(f) => println!("{}: unsupported format", f),
+                RError::Fatal(e) => println!("Error: {}", e),
+                RError::Unknown(s) => println!("Unknown error: {}", s),
             }
             std::process::exit(1);
         }
