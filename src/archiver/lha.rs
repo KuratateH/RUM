@@ -1,12 +1,12 @@
 use crate::archiver::{Archiver, Format, ArchiverOpts};
-use crate::cli::{R_Error, Result};
+use crate::cli::{RError, Result};
 
 pub(super) struct LhaArchiver {
 }
 
 impl Archiver for  LhaArchiver {
     fn perform(&self, _: &ArchiverOpts) -> Result<()> {
-        Err(R_Error::UnsupportedFormat("only extraction support for lha".to_string()))
+        Err(RError::UnsupportedFormat("only extraction support for lha".to_string()))
     }
     fn format(&self) -> Format {
         Format::LHA

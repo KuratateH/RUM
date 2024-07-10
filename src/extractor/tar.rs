@@ -5,7 +5,7 @@ use std::{fs::File, path::PathBuf};
 use tar::Archive;
 use xz2::read::XzDecoder;
 
-use crate::cli::{Result, R_Error};
+use crate::cli::{Result, RError};
 use crate::extractor::{Extractor, ExtractorOpts};
 use crate::format::Format;
 
@@ -112,7 +112,7 @@ where
 {
     let file = match File::open(file) {
         Ok(f) => f,
-        Err(e) => return Err(R_Error::IO(e)),
+        Err(e) => return Err(RError::IO(e)),
     };
     let writer = opener(file);
     Ok(Archive::new(writer))

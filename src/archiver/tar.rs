@@ -7,7 +7,7 @@ use tar::Builder;
 use xz2::write::XzEncoder;
 
 use crate::archiver::{Archiver, Format, ArchiverOpts};
-use crate::cli::{R_Error, Result};
+use crate::cli::{RError, Result};
 
 pub(super) struct TarArchiver {
 }
@@ -90,14 +90,14 @@ fn write_tar_impl<W: Write>(file: W, targets: Vec<PathBuf>, recursive: bool) -> 
         }
     }
     if let Err(e) = builder.finish() {
-        return Err(R_Error::ArchiverError(e.to_string()))
+        return Err(RError::ArchiverError(e.to_string()))
     }
     Ok(())
 }
 
 fn process_dir<W: Write>(builder: &mut Builder<W>, target: PathBuf, recursive: bool) -> Result<()> {
     if let Err(e) = builder.append_dir(&target, &target) {
-        return Err(R_Error::ArchiverError(e.to_string()))
+        return Err(RError::ArchiverError(e.to_string()))
     }
     for entry in target.read_dir().unwrap() {
         if let Ok(e) = entry {
@@ -114,7 +114,7 @@ fn process_dir<W: Write>(builder: &mut Builder<W>, target: PathBuf, recursive: b
 
 fn process_file<W: Write>(builder: &mut Builder<W>, target: PathBuf) -> Result<()> {
     if let Err(e) = builder.append_path(target) {
-        Err(R_Error::ArchiverError(e.to_string()))
+        Err(RError::ArchiverError(e.to_string()))
     } else {
         Ok(())
     }

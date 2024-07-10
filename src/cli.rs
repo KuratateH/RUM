@@ -1,7 +1,7 @@
 use std::path::PathBuf;
 use clap::{Parser, ValueEnum};
 
-pub type Result<T> = std::result::Result<T, R_Error>;
+pub type Result<T> = std::result::Result<T, RError>;
 
 #[derive(Parser, Debug)]
 #[clap(
@@ -28,7 +28,7 @@ pub struct CliOpts {
 impl CliOpts {
     pub fn run_mode(&mut self) -> Result<RunMode> {
         if self.args.len() == 0 {
-            return Err(R_Error::NoArgumentsGiven)
+            return Err(RError::NoArgumentsGiven)
         }
         if self.mode == RunMode::Auto {
             if is_all_args_archives(&self.args) {
@@ -66,7 +66,7 @@ pub enum RunMode {
 }
 
 #[derive(Debug)]
-pub enum R_Error {
+pub enum RError {
     NoArgumentsGiven,
     FileNotFound(PathBuf),
     FileExists(PathBuf),

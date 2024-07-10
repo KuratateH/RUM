@@ -1,7 +1,7 @@
 use archiver::{archiver_info, ArchiverOpts};
 use clap::Parser;
 use cli::*;
-use cli::{RunMode, R_Error};
+use cli::{RunMode, RError};
 use extractor::{extractor_info, ExtractorOpts};
 
 mod archiver;

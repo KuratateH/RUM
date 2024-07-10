@@ -5,7 +5,7 @@ use sevenz_rust::{Archive, BlockDecoder, Password};
 
 use crate::extractor::Extractor;
 use crate::format::Format;
-use crate::cli::{Result, R_Error};
+use crate::cli::{Result, RError};
 
 use super::ExtractorOpts;
 
@@ -24,7 +24,7 @@ impl Extractor for SevenZExtractor {
                 }
                 Ok(r)
             },
-            Err(e) => Err(R_Error::Fatal(Box::new(e))),
+            Err(e) => Err(RError::Fatal(Box::new(e))),
         }
     }
     fn perform(&self, archive_file: PathBuf, opts: &ExtractorOpts) -> Result<()> {
@@ -32,7 +32,7 @@ impl Extractor for SevenZExtractor {
             Ok(file) => {
                 file
             },
-            Err(e) => return Err(R_Error::IO(e)),
+            Err(e) => return Err(RError::IO(e)),
         };
         extract(&mut file, archive_file, opts)
     }
@@ -48,7 +48,7 @@ fn extract(mut file: &File, path: PathBuf, opts: &ExtractorOpts) -> Result<()> {
         Ok(reader) => {
             reader
         },
-        Err(e) => return Err(R_Error::Fatal(Box::new(e))),
+        Err(e) => return Err(RError::Fatal(Box::new(e))),
     };
     let folder_count = archive.folders.len();
     for findex in 0..folder_count {
@@ -57,7 +57,7 @@ fn extract(mut file: &File, path: PathBuf, opts: &ExtractorOpts) -> Result<()> {
             let dest = opts.destination(&path).join(entry.name.clone());
             sevenz_rust::default_entry_extract_fn(entry, reader, &dest)
         }) {
-            return Err(R_Error::Fatal(Box::new(e)))
+            return Err(RError::Fatal(Box::new(e)))
         }
     }
     Ok(())
