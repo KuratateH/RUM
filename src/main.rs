@@ -12,17 +12,15 @@ mod verboser;
 
 fn perform(mut opts: CliOpts) -> Result<()> {
     match opts.run_mode() {
-        Ok(RunMode::Archive) => return perform_archive(opts),
-        Ok(RunMode::Extract) => return perform_extract(opts),
-        Ok(RunMode::List) => return perform_list(opts),
+        Ok(RunMode::Archive) => perform_archive(opts),
+        Ok(RunMode::Extract) => perform_extract(opts),
+        Ok(RunMode::List) => perform_list(opts),
         Ok(RunMode::Auto) => {
-            return Err(RError::Unknown(
+            Err(RError::Unknown(
                 "cannot distinguish archiving and extracting".to_string(),
             ))
         }
-        Err(e) => {
-            return Err(e);
-        }
+        Err(e) => Err(e),
     };
 }
 
