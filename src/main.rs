@@ -21,7 +21,7 @@ fn perform(mut opts: CliOpts) -> Result<()> {
             ))
         }
         Err(e) => Err(e),
-    };
+    }
 }
 
 fn perform_extract(opts: CliOpts) -> Result<()> {
