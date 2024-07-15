@@ -20,11 +20,13 @@ delharc = "0.6.1"
 flate2 = "1.0.29"
 sevenz-rust = "0.6.0"
 tar = "0.4.40"
-time = "0.3.36"
+
 unrar = "0.5.3"
 xz2 = "0.1.7"
 zip = "2.1.0"
 zstd = "0.13.1"
+nt-time = "0.8.0"
+time = "0.3.36"
 
 [build-dependencies]
 clap = { version = "4.5.4", features = ["derive"] }

@@ -1,8 +1,10 @@
+
 use archiver::{archiver_info, ArchiverOpts};
 use clap::Parser;
 use cli::*;
 use cli::{RunMode, RError};
 use extractor::{extractor_info, ExtractorOpts};
+use std::fs::{File,create_dir_all};
 
 mod archiver;
 mod cli;
@@ -12,16 +14,18 @@ mod verboser;
 
 fn perform(mut opts: CliOpts) -> Result<()> {
     match opts.run_mode() {
-        Ok(RunMode::Archive) => perform_archive(opts),
-        Ok(RunMode::Extract) => perform_extract(opts),
-        Ok(RunMode::List) => perform_list(opts),
+        Ok(RunMode::Archive) => return perform_archive(opts),
+        Ok(RunMode::Extract) => return perform_extract(opts),
+        Ok(RunMode::List) => return perform_list(opts),
         Ok(RunMode::Auto) => {
-            Err(RError::Unknown(
+            return Err(RError::Unknown(
                 "cannot distinguish archiving and extracting".to_string(),
             ))
         }
-        Err(e) => Err(e),
-    }
+        Err(e) => {
+            return Err(e);
+        }
+    };
 }
 
 fn perform_extract(opts: CliOpts) -> Result<()> {
@@ -64,8 +68,26 @@ fn perform_archive(opts: CliOpts) -> Result<()> {
             archiver.perform(&inout)
         }
         Err(e) => Err(e),
-    } 
+    }
 }
+
+//ファイル作成の後ににしていされたファイル名のファイルが存在するかの確認(没)
+// fn perform_archive(opts: CliOpts) -> Result<()> {
+//     let inout = ArchiverOpts::new(&opts);
+//     match create_file_and_get_destination(&inout) {
+//         Ok(_) => {
+//             match archiver::create_archiver(&opts.output.unwrap()) {
+//                 Ok(archiver) => {
+//                     inout.v.verbose(archiver_info(&archiver, &inout));
+//                     archiver.perform(&inout)
+//                 }
+//                 Err(e) => Err(e),
+//             }
+//         }
+//         Err(e) => Err(e),
+//     }
+    
+// }
 
 fn main() -> Result<()> {
     match perform(CliOpts::parse()) {
@@ -82,8 +104,9 @@ fn main() -> Result<()> {
                 RError::IO(e) => println!("IO error: {}", e),
                 RError::IOError(e) => println!("IO error: {}", e),
                 RError::Archiver(s) => println!("Archive error: {}", s),
-                RError::ArchiverError(s) => println!("Archive error: {}", s),
+                //RError::ArchiverError(e) => write!(f, "Archiver error: {}", e),
                 RError::UnknownFormat(f) => println!("{}: unknown format", f),
+                RError::ArchiverError(s) => println!("Archive error: {}", s),
                 RError::UnsupportedFormat(f) => println!("{}: unsupported format", f),
                 RError::Fatal(e) => println!("Error: {}", e),
                 RError::Unknown(s) => println!("Unknown error: {}", s),
@@ -92,6 +115,26 @@ fn main() -> Result<()> {
         }
     }
 }
+
+// ファイル作成の後ににしていされたファイル名のファイルが存在するかの確認(没)
+// pub fn create_file_and_get_destination(opts: &ArchiverOpts) -> Result<File> {
+//     let p = opts.dest.as_path();
+//     if p.exists() {
+//         if p.is_file() && !opts.overwrite {
+//             return Err(RError::FileExists(opts.dest.clone()));
+//         }
+//     } else {
+//         if let Some(parent) = p.parent() {
+//             if !parent.exists() {
+//                 if let Err(e) = create_dir_all(parent) {
+//                     return Err(RError::IOError(e));
+//                 }
+//             }
+//         }
+//     }
+//     File::create(opts.dest.as_path()).map_err(RError::IOError)
+// }
+
 
 #[cfg(test)]
 mod tests {

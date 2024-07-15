@@ -1,3 +1,4 @@
+
 use std::fs::File;
 use std::path::PathBuf;
 
@@ -119,3 +120,4 @@ mod tests {
         let _ = std::fs::remove_file("results/test.7z");
     }
 }
+
