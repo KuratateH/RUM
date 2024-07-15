@@ -72,7 +72,7 @@ pub enum RError {
     FileExists(PathBuf),
     IO(std::io::Error),
     IOError(std::io::Error),
-    Archiver(String),
+    //Archiver(String),
     ArchiverError(String),
     UnsupportedFormat(String),
     UnknownFormat(String),
@@ -89,22 +89,22 @@ mod tests {
 
     #[test]
     fn test_find_mode() {
-        let mut cli1 = CliOpts::parse_from(&["RUM_test", "src", "LICENSE", "README.md", "Cargo.toml"]);
+        let mut cli1 = CliOpts::parse_from(&["rum_test", "src", "LICENSE", "README.md", "Cargo.toml"]);
         let r1 = cli1.run_mode();
         assert!(r1.is_ok());
         assert_eq!(r1.unwrap(), RunMode::Archive);
 
-        let mut cli2 = CliOpts::parse_from(&["RUM_test", "src", "LICENSE", "README.md", "hoge.zip"]);
+        let mut cli2 = CliOpts::parse_from(&["rum_test", "src", "LICENSE", "README.md", "hoge.zip"]);
         let r2 = cli2.run_mode();
         assert!(r2.is_ok());
         assert_eq!(cli2.run_mode().unwrap(), RunMode::Archive);
 
-        let mut cli3 = CliOpts::parse_from(&["RUM_test", "src.zip", "LICENSE.tar", "README.tar.bz2", "hoge.rar"]);
+        let mut cli3 = CliOpts::parse_from(&["rum_test", "src.zip", "LICENSE.tar", "README.tar.bz2", "hoge.rar"]);
         let r3 = cli3.run_mode();
         assert!(r3.is_ok());
         assert_eq!(cli3.run_mode().unwrap(), RunMode::Extract);
 
-        let mut cli4 = CliOpts::parse_from(&["RUM_test", "src.zip", "LICENSE.tar", "README.tar.bz2", "hoge.rar", "--mode", "list"]);
+        let mut cli4 = CliOpts::parse_from(&["rum_test", "src.zip", "LICENSE.tar", "README.tar.bz2", "hoge.rar", "--mode", "list"]);
         let r4 = cli3.run_mode();
         assert!(r4.is_ok());
         assert_eq!(cli4.run_mode().unwrap(), RunMode::List);

@@ -4,7 +4,7 @@ use clap::Parser;
 use cli::*;
 use cli::{RunMode, RError};
 use extractor::{extractor_info, ExtractorOpts};
-use std::fs::{File,create_dir_all};
+//use std::fs::{File,create_dir_all};
 
 mod archiver;
 mod cli;
@@ -76,14 +76,26 @@ fn perform_list(opts: CliOpts) -> Result<()> {
 
 fn perform_archive(opts: CliOpts) -> Result<()> {
     let inout = ArchiverOpts::new(&opts);
-    match archiver::create_archiver(&opts.output.unwrap()) {
+    let result = match archiver::create_archiver(&opts.output.unwrap()) {
         Ok(archiver) => {
             inout.v.verbose(archiver_info(&archiver, &inout));
             archiver.perform(&inout)
         }
         Err(e) => Err(e),
-    }
+    };
+    result
 }
+
+// fn perform_archive(opts: CliOpts) -> Result<()> {
+//     let inout = ArchiverOpts::new(&opts);
+//     match archiver::create_archiver(&opts.output.unwrap()) {
+//         Ok(archiver) => {
+//             inout.v.verbose(archiver_info(&archiver, &inout));
+//             archiver.perform(&inout)
+//         }
+//         Err(e) => Err(e),
+//     }
+// }
 
 //ファイル作成の後ににしていされたファイル名のファイルが存在するかの確認(没)
 // fn perform_archive(opts: CliOpts) -> Result<()> {
@@ -117,7 +129,7 @@ fn main() -> Result<()> {
                 }
                 RError::IO(e) => println!("IO error: {}", e),
                 RError::IOError(e) => println!("IO error: {}", e),
-                RError::Archiver(s) => println!("Archive error: {}", s),
+                //RError::Archiver(s) => println!("Archive error: {}", s),
                 //RError::ArchiverError(e) => write!(f, "Archiver error: {}", e),
                 RError::UnknownFormat(f) => println!("{}: unknown format", f),
                 RError::ArchiverError(s) => println!("Archive error: {}", s),
@@ -159,7 +171,7 @@ mod tests {
     #[test]
     fn test_run() {
         let opts = CliOpts::parse_from(&[
-            "RUM_test",
+            "_test",
             "-o",
             "test.zip",
             "src",

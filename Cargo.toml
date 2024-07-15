@@ -1,8 +1,8 @@
 [package]
-name = "RUM"
+name = "rum"
 version = "0.5.0"
 description = "A tool for extracting/archiving files and directories in multiple formats."
-repository = "https://github.com/KuratateH/RUM"
+repository = "https://github.com/KuratateH/rum"
 readme = "README.md"
 authors = [
     "Haruaki KuratateH <KuratateH_f@ke_cafebabe.jp>"
