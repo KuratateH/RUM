@@ -4,10 +4,10 @@
 <!--[![DOI](https://zenodo.org/badge/335323499.svg)](https://zenodo.org/badge/latestdoi/335323499)-->
 [![Coverage Status](https://coveralls.io/repos/github/KuratateH/RUM/badge.svg?branch=main)](https://coveralls.io/github/KuratateH/RUM?branch=main)
 [![Rust Report Card](https://rust-reportcard.xuri.me/badge/github.com/kuratateh/rum)](https://rust-reportcard.xuri.me/report/github.com/kuratateh/rum)
-様々なフォーマットに対応した圧縮ツールです
+様々なフォーマットに対応した圧縮、解凍ツールです
 
 ## Description
-数多くの存在するアーカイブ形式には，インターフェースが異なっている問題があります．このソフトフェアではその問題に対処し，それらのアーカイブファイルの抽出を行うことができます．
+数多くの存在する圧縮ファイルの形式には，インターフェースが異なっている問題があります．このソフトフェアではその問題に対処し，それらの圧縮ファイルへの圧縮、解凍を行うことができます．
 
 ## Usage
 
@@ -24,11 +24,14 @@ OPTIONS
       --overwrite       Overwrite the output file if it exists.
   -v, --verbose         Display verbose output.
   -h, --help            Display this help message.
+
 ARGUMENTS
   extract mode: archive files to be extracted.
   archive mode: files to be archived.
   auto mode:    if the arguments have archive files, it will extract them.
                 Otherwise, it will archive the files.
+EXAMPLE(archive)
+-m -o output.zip input1 input2 …
 ```
 
 ## Install
