@@ -103,7 +103,7 @@ fn main() -> Result<()> {
                 }
                 RError::IO(e) => println!("IO error: {}", e),
                 RError::IOError(e) => println!("IO error: {}", e),
-                RError::Archiver(s) => println!("Archive error: {}", s),
+                //RError::Archiver(s) => println!("Archive error: {}", s),
                 //RError::ArchiverError(e) => write!(f, "Archiver error: {}", e),
                 RError::UnknownFormat(f) => println!("{}: unknown format", f),
                 RError::ArchiverError(s) => println!("Archive error: {}", s),
