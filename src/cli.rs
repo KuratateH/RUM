@@ -53,7 +53,7 @@ fn is_all_args_archives(args: &[PathBuf]) -> bool {
                 return true
             }
         }
-        return false
+        false
     })
 }
 
