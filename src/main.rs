@@ -26,21 +26,6 @@ fn perform(mut opts: CliOpts) -> Result<()> {
 }
 
 
-// fn perform(mut opts: CliOpts) -> Result<()> {
-//     match opts.run_mode() {
-//         Ok(RunMode::Archive) => return perform_archive(opts),
-//         Ok(RunMode::Extract) => return perform_extract(opts),
-//         Ok(RunMode::List) => return perform_list(opts),
-//         Ok(RunMode::Auto) => {
-//             return Err(RError::Unknown(
-//                 "cannot distinguish archiving and extracting".to_string(),
-//             ))
-//         }
-//         Err(e) => {
-//             return Err(e);
-//         }
-//     };
-// }
 
 fn perform_extract(opts: CliOpts) -> Result<()> {
     let args = opts.args.clone();
@@ -86,17 +71,6 @@ fn perform_archive(opts: CliOpts) -> Result<()> {
     result
 }
 
-// fn perform_archive(opts: CliOpts) -> Result<()> {
-//     let inout = ArchiverOpts::new(&opts);
-//     match archiver::create_archiver(&opts.output.unwrap()) {
-//         Ok(archiver) => {
-//             inout.v.verbose(archiver_info(&archiver, &inout));
-//             archiver.perform(&inout)
-//         }
-//         Err(e) => Err(e),
-//     }
-// }
-
 //ファイル作成の後ににしていされたファイル名のファイルが存在するかの確認(没)
 // fn perform_archive(opts: CliOpts) -> Result<()> {
 //     let inout = ArchiverOpts::new(&opts);
@@ -129,7 +103,7 @@ fn main() -> Result<()> {
                 }
                 RError::IO(e) => println!("IO error: {}", e),
                 RError::IOError(e) => println!("IO error: {}", e),
-                //RError::Archiver(s) => println!("Archive error: {}", s),
+                RError::Archiver(s) => println!("Archive error: {}", s),
                 //RError::ArchiverError(e) => write!(f, "Archiver error: {}", e),
                 RError::UnknownFormat(f) => println!("{}: unknown format", f),
                 RError::ArchiverError(s) => println!("Archive error: {}", s),
