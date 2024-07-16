@@ -1,0 +1,22 @@
+FROM rust:latest AS builder
+
+ARG VERSION=0.4.6
+ARG TARGETPLATFORM
+
+WORKDIR /work/rum
+
+COPY . .
+RUN cargo build --release 
+
+FROM gcr.io/distroless/cc
+
+ARG VERSION=0.4.6
+
+LABEL org.opencontainers.image.source https://github.com/KuratateH/rum
+
+COPY --from=builder /work/rum/target/release/rum /opt/rum/rum
+
+WORKDIR /workdir
+USER nonroot
+
+ENTRYPOINT [ "/opt/rum/rum" ]
