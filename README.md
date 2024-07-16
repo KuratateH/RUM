@@ -4,6 +4,8 @@
 <!--[![DOI](https://zenodo.org/badge/335323499.svg)](https://zenodo.org/badge/latestdoi/335323499)-->
 [![Coverage Status](https://coveralls.io/repos/github/KuratateH/RUM/badge.svg?branch=main)](https://coveralls.io/github/KuratateH/RUM?branch=main)
 [![Rust Report Card](https://rust-reportcard.xuri.me/badge/github.com/kuratateh/rum)](https://rust-reportcard.xuri.me/report/github.com/kuratateh/rum)
+[![DOI](https://zenodo.org/badge/784023252.svg)](https://zenodo.org/doi/10.5281/zenodo.12747342)
+
 
 様々なフォーマットに対応した圧縮、解凍ツールです
 
