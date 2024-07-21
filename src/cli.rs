@@ -47,7 +47,7 @@ impl CliOpts {
 fn is_all_args_archives(args: &[PathBuf]) -> bool {
     args.iter().all(|arg| {
         let name = arg.to_str().unwrap().to_lowercase();
-        let exts = vec![".zip", ".tar", ".tar.gz", ".tgz", ".tar.bz2", ".tbz2", ".rar", ".jar", ".war", ".ear", "7z", ];
+        let exts = vec![".zip", ".tar", ".tar.gz", ".tgz", ".tar.bz2", ".tbz2", ".rar", ".jar", ".war", ".ear", "7z", "cab", ];
         for ext in exts.iter() {
             if name.ends_with(ext) {
                 return true
@@ -72,8 +72,9 @@ pub enum RError {
     FileExists(PathBuf),
     IO(std::io::Error),
     IOError(std::io::Error),
-    //Archiver(String),
+    Archiver(String),
     ArchiverError(String),
+    ExtractError(String),
     UnsupportedFormat(String),
     UnknownFormat(String),
     Unknown(String),

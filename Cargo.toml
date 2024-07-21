@@ -20,6 +20,8 @@ delharc = "0.6.1"
 flate2 = "1.0.29"
 sevenz-rust = "0.6.0"
 tar = "0.4.40"
+cab = "0.2"
+tempfile = "3.1"
 
 unrar = "0.5.3"
 xz2 = "0.1.7"

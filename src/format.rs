@@ -25,6 +25,8 @@ pub fn find_format(file_name: Option<&OsStr>) -> Result<Format> {
                 return Ok(Format::Rar);
             } else if name.ends_with(".zip") || name.ends_with(".jar") || name.ends_with(".war") || name.ends_with(".ear") {
                 return Ok(Format::Zip);
+            } else if name.ends_with(".cab") {
+                return Ok(Format::CAB);
             } else {
                 return Ok(Format::Unknown(file_name.to_str().unwrap().to_string()));
             }
@@ -44,6 +46,7 @@ pub enum Format {
     SevenZ,
     LHA,
     Rar,
+    CAB,
     Unknown(String),
 }
 
@@ -59,6 +62,7 @@ impl Display for Format {
             Format::SevenZ => write!(f, "SevenZ"),
             Format::LHA => write!(f, "LHA"),
             Format::Rar => write!(f, "Rar"),
+            Format::CAB => write!(f, "CAB"),
             Format::Unknown(s) => write!(f, "{}: unknown format", s),
         }
     }
