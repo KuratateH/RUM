@@ -154,8 +154,8 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          # ${{ github.repository }} = KuratateH/RUM
-          images: ghcr.io/${{ github.repository }}
+          # ghcr.io/kuratateh/rum = KuratateH/RUM
+          images: ghcr.io/kuratateh/rum
           tags: |
             type=raw,value=latest
             type=sha,prefix=,suffix=,format=short
@@ -173,5 +173,5 @@ jobs:
           platforms: linux/amd64,linux/arm64
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-          cache-from: type=registry,ref=ghcr.io/${{ github.repository}}:buildcache
-          cache-to: type=registry,ref=ghcr.io/${{ github.repository }}:buildcache,mode=max
+          cache-from: type=registry,ref=ghcr.io/kuratateh/rum:buildcache
+          cache-to: type=registry,ref=ghcr.io/kuratateh/rum:buildcache,mode=max
