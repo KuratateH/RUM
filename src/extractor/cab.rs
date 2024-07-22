@@ -1,6 +1,7 @@
 use std::fs::File;
-use std::io::{BufReader, BufWriter, Read, Write};
-use std::path::{Path, PathBuf};
+//use std::io::{BufReader, BufWriter, Read, Write};
+use std::io::BufReader;
+use std::path::PathBuf;
 use cab::Cabinet;
 use crate::cli::{Result, RError};
 use crate::extractor::{Extractor, ExtractorOpts};

@@ -11,18 +11,18 @@ fn generate(s: Shell, app: &mut Command, outdir: &Path, file: &str) {
     std::fs::create_dir_all(destfile.parent().unwrap()).unwrap();
     let mut dest = File::create(destfile).unwrap();
 
-    clap_complete::generate(s, app, "totebag", &mut dest);
+    clap_complete::generate(s, app, "rum", &mut dest);
 }
 
 fn main() {
     let mut app = CliOpts::command();
-    app.set_bin_name("totebag");
+    app.set_bin_name("rum");
 
     let outdir = std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("target/completions/");
 
-    generate(Shell::Bash, &mut app, &outdir, "bash/totebag");
-    generate(Shell::Elvish, &mut app, &outdir, "elvish/totebag");
-    generate(Shell::Fish, &mut app, &outdir, "fish/totebag");
-    generate(Shell::PowerShell, &mut app, &outdir, "powershell/totebag");
-    generate(Shell::Zsh, &mut app, &outdir, "zsh/_totebag");
+    generate(Shell::Bash, &mut app, &outdir, "bash/rum");
+    generate(Shell::Elvish, &mut app, &outdir, "elvish/rum");
+    generate(Shell::Fish, &mut app, &outdir, "fish/rum");
+    generate(Shell::PowerShell, &mut app, &outdir, "powershell/rum");
+    generate(Shell::Zsh, &mut app, &outdir, "zsh/_rum");
 }

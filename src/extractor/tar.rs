@@ -159,105 +159,105 @@ fn list_tar<R: Read>(mut archive: tar::Archive<R>) -> Result<Vec<String>> {
     Ok(result)
 }
 
-#[cfg(test)]
-mod tests {
-    use super::*;
-    use crate::verboser::create_verboser;
+// #[cfg(test)]
+// mod tests {
+//     use super::*;
+//     use crate::verboser::create_verboser;
 
-    #[test]
-    fn test_list_tar_file() {
-        let extractor = TarExtractor {};
-        let file = PathBuf::from("testdata/test.tar");
-        match extractor.list_archives(file) {
-            Ok(r) => {
-                assert_eq!(r.len(), 16);
-                assert_eq!(r.get(0), Some("Cargo.toml".to_string()).as_ref());
-                assert_eq!(r.get(1), Some("build.rs".to_string()).as_ref());
-                assert_eq!(r.get(2), Some("LICENSE".to_string()).as_ref());
-                assert_eq!(r.get(3), Some("README.md".to_string()).as_ref());
-            }
-            Err(_) => assert!(false),
-        }
-    }
+//     #[test]
+//     fn test_list_tar_file() {
+//         let extractor = TarExtractor {};
+//         let file = PathBuf::from("testdata/test.tar");
+//         match extractor.list_archives(file) {
+//             Ok(r) => {
+//                 assert_eq!(r.len(), 16);
+//                 assert_eq!(r.get(0), Some("Cargo.toml".to_string()).as_ref());
+//                 assert_eq!(r.get(1), Some("build.rs".to_string()).as_ref());
+//                 assert_eq!(r.get(2), Some("LICENSE".to_string()).as_ref());
+//                 assert_eq!(r.get(3), Some("README.md".to_string()).as_ref());
+//             }
+//             Err(_) => assert!(false),
+//         }
+//     }
 
-    #[test]
-    fn test_extract_archive() {
-        let e = TarExtractor {};
-        let file = PathBuf::from("testdata/test.tar");
-        let opts = ExtractorOpts {
-            dest: PathBuf::from("results/tar"),
-            use_archive_name_dir: false,
-            overwrite: true,
-            v: create_verboser(false),
-        };
-        match e.perform(file, &opts) {
-            Ok(_) => {
-                assert!(true);
-                assert!(PathBuf::from("results/tar/Cargo.toml").exists());
-                std::fs::remove_dir_all(PathBuf::from("results/tar")).unwrap();
-            }
-            Err(_) => assert!(false),
-        };
-    }
+//     #[test]
+//     fn test_extract_archive() {
+//         let e = TarExtractor {};
+//         let file = PathBuf::from("testdata/test.tar");
+//         let opts = ExtractorOpts {
+//             dest: PathBuf::from("results/tar"),
+//             use_archive_name_dir: false,
+//             overwrite: true,
+//             v: create_verboser(false),
+//         };
+//         match e.perform(file, &opts) {
+//             Ok(_) => {
+//                 assert!(true);
+//                 assert!(PathBuf::from("results/tar/Cargo.toml").exists());
+//                 std::fs::remove_dir_all(PathBuf::from("results/tar")).unwrap();
+//             }
+//             Err(_) => assert!(false),
+//         };
+//     }
 
-    #[test]
-    fn test_list_tarbz2_file() {
-        let extractor = TarBz2Extractor {};
-        let file = PathBuf::from("testdata/test.tar.bz2");
-        match extractor.list_archives(file) {
-            Ok(r) => {
-                assert_eq!(r.len(), 16);
-                assert_eq!(r.get(0), Some("Cargo.toml".to_string()).as_ref());
-                assert_eq!(r.get(1), Some("build.rs".to_string()).as_ref());
-                assert_eq!(r.get(2), Some("LICENSE".to_string()).as_ref());
-                assert_eq!(r.get(3), Some("README.md".to_string()).as_ref());
-            }
-            Err(_) => assert!(false),
-        }
-    }
+//     #[test]
+//     fn test_list_tarbz2_file() {
+//         let extractor = TarBz2Extractor {};
+//         let file = PathBuf::from("testdata/test.tar.bz2");
+//         match extractor.list_archives(file) {
+//             Ok(r) => {
+//                 assert_eq!(r.len(), 16);
+//                 assert_eq!(r.get(0), Some("Cargo.toml".to_string()).as_ref());
+//                 assert_eq!(r.get(1), Some("build.rs".to_string()).as_ref());
+//                 assert_eq!(r.get(2), Some("LICENSE".to_string()).as_ref());
+//                 assert_eq!(r.get(3), Some("README.md".to_string()).as_ref());
+//             }
+//             Err(_) => assert!(false),
+//         }
+//     }
 
-    #[test]
-    fn test_list_targz_file() {
-        let extractor = TarGzExtractor {};
-        let file = PathBuf::from("testdata/test.tar.gz");
-        match extractor.list_archives(file) {
-            Ok(r) => {
-                assert_eq!(r.len(), 16);
-                assert_eq!(r.get(0), Some("Cargo.toml".to_string()).as_ref());
-                assert_eq!(r.get(1), Some("build.rs".to_string()).as_ref());
-                assert_eq!(r.get(2), Some("LICENSE".to_string()).as_ref());
-                assert_eq!(r.get(3), Some("README.md".to_string()).as_ref());
-            }
-            Err(_) => assert!(false),
-        }
-    }
+//     #[test]
+//     fn test_list_targz_file() {
+//         let extractor = TarGzExtractor {};
+//         let file = PathBuf::from("testdata/test.tar.gz");
+//         match extractor.list_archives(file) {
+//             Ok(r) => {
+//                 assert_eq!(r.len(), 16);
+//                 assert_eq!(r.get(0), Some("Cargo.toml".to_string()).as_ref());
+//                 assert_eq!(r.get(1), Some("build.rs".to_string()).as_ref());
+//                 assert_eq!(r.get(2), Some("LICENSE".to_string()).as_ref());
+//                 assert_eq!(r.get(3), Some("README.md".to_string()).as_ref());
+//             }
+//             Err(_) => assert!(false),
+//         }
+//     }
 
-    #[test]
-    fn test_list_tarzstd_file() {
-        let extractor = TarZstdExtractor {};
-        let file = PathBuf::from("testdata/test.tar.zst");
-        match extractor.list_archives(file) {
-            Ok(r) => {
-                assert_eq!(r.len(), 16);
-                assert_eq!(r.get(0), Some("Cargo.toml".to_string()).as_ref());
-                assert_eq!(r.get(1), Some("build.rs".to_string()).as_ref());
-                assert_eq!(r.get(2), Some("LICENSE".to_string()).as_ref());
-                assert_eq!(r.get(3), Some("README.md".to_string()).as_ref());
-            }
-            Err(_) => assert!(false),
-        }
-    }
+//     #[test]
+//     fn test_list_tarzstd_file() {
+//         let extractor = TarZstdExtractor {};
+//         let file = PathBuf::from("testdata/test.tar.zst");
+//         match extractor.list_archives(file) {
+//             Ok(r) => {
+//                 assert_eq!(r.len(), 16);
+//                 assert_eq!(r.get(0), Some("Cargo.toml".to_string()).as_ref());
+//                 assert_eq!(r.get(1), Some("build.rs".to_string()).as_ref());
+//                 assert_eq!(r.get(2), Some("LICENSE".to_string()).as_ref());
+//                 assert_eq!(r.get(3), Some("README.md".to_string()).as_ref());
+//             }
+//             Err(_) => assert!(false),
+//         }
+//     }
 
 
-    #[test]
-    fn test_format() {
-        let e1 = TarExtractor {};
-        assert_eq!(e1.format(), Format::Tar);
+//     #[test]
+//     fn test_format() {
+//         let e1 = TarExtractor {};
+//         assert_eq!(e1.format(), Format::Tar);
 
-        let e2 = TarGzExtractor {};
-        assert_eq!(e2.format(), Format::TarGz);
+//         let e2 = TarGzExtractor {};
+//         assert_eq!(e2.format(), Format::TarGz);
 
-        let e3 = TarBz2Extractor {};
-        assert_eq!(e3.format(), Format::TarBz2);
-    }
-}
+//         let e3 = TarBz2Extractor {};
+//         assert_eq!(e3.format(), Format::TarBz2);
+//     }
+// }

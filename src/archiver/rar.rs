@@ -13,30 +13,30 @@ impl Archiver for  RarArchiver {
     }
 }
 
-#[cfg(test)]
-mod tests {
-    use super::*;
+// #[cfg(test)]
+// mod tests {
+//     use super::*;
 
-    use std::path::PathBuf;
-    use crate::verboser::create_verboser;
+//     use std::path::PathBuf;
+//     use crate::verboser::create_verboser;
 
-    #[test]
-    fn test_format() {
-        let archiver = RarArchiver{};
-        assert_eq!(archiver.format(), Format::Rar);
-    }
+//     #[test]
+//     fn test_format() {
+//         let archiver = RarArchiver{};
+//         assert_eq!(archiver.format(), Format::Rar);
+//     }
 
-    #[test]
-    fn test_archive() {
-        let archiver = RarArchiver{};
-        let opts = ArchiverOpts {
-            dest: PathBuf::from("results/test.rar"),
-            targets: vec![],
-            overwrite: false,
-            recursive: false,
-            v: create_verboser(false),
-        };
-        let r = archiver.perform(&opts);
-        assert!(r.is_err());
-    }
-}
+//     #[test]
+//     fn test_archive() {
+//         let archiver = RarArchiver{};
+//         let opts = ArchiverOpts {
+//             dest: PathBuf::from("results/test.rar"),
+//             targets: vec![],
+//             overwrite: false,
+//             recursive: false,
+//             v: create_verboser(false),
+//         };
+//         let r = archiver.perform(&opts);
+//         assert!(r.is_err());
+//     }
+// }

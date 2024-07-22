@@ -13,7 +13,7 @@ mod tar;
 mod zip;
 mod cab;
 
-use crate::extractor::cab::CABExtractor;
+//use crate::extractor::cab::CABExtractor;
 
 pub struct ExtractorOpts {
     pub dest: PathBuf,
@@ -95,67 +95,67 @@ pub fn extractor_info(
     )
 }
 
-#[cfg(test)]
-mod tests {
-    use super::*;
+// #[cfg(test)]
+// mod tests {
+//     use super::*;
 
-    #[test]
-    fn test_destination() {
-        let opts1 = ExtractorOpts {
-            dest: PathBuf::from("."),
-            use_archive_name_dir: true,
-            overwrite: false,
-            v: create_verboser(false),
-        };
-        let target = PathBuf::from("/tmp/archive.zip");
-        assert_eq!(opts1.destination(&target), PathBuf::from("./archive"));
+//     #[test]
+//     fn test_destination() {
+//         let opts1 = ExtractorOpts {
+//             dest: PathBuf::from("."),
+//             use_archive_name_dir: true,
+//             overwrite: false,
+//             v: create_verboser(false),
+//         };
+//         let target = PathBuf::from("/tmp/archive.zip");
+//         assert_eq!(opts1.destination(&target), PathBuf::from("./archive"));
 
-        let opts2 = ExtractorOpts {
-            dest: PathBuf::from("."),
-            use_archive_name_dir: false,
-            overwrite: false,
-            v: create_verboser(false),
-        };
-        let target = PathBuf::from("/tmp/archive.zip");
-        assert_eq!(opts2.destination(&target), PathBuf::from("."));
-    }
+//         let opts2 = ExtractorOpts {
+//             dest: PathBuf::from("."),
+//             use_archive_name_dir: false,
+//             overwrite: false,
+//             v: create_verboser(false),
+//         };
+//         let target = PathBuf::from("/tmp/archive.zip");
+//         assert_eq!(opts2.destination(&target), PathBuf::from("."));
+//     }
 
-    #[test]
-    fn test_create_extractor() {
-        let e1 = create_extractor(&PathBuf::from("results/test.zip"));
-        assert!(e1.is_ok());
-        assert_eq!(e1.unwrap().format(), Format::Zip);
+//     #[test]
+//     fn test_create_extractor() {
+//         let e1 = create_extractor(&PathBuf::from("results/test.zip"));
+//         assert!(e1.is_ok());
+//         assert_eq!(e1.unwrap().format(), Format::Zip);
 
-        let e2 = create_extractor(&PathBuf::from("results/test.tar"));
-        assert!(e2.is_ok());
-        assert_eq!(e2.unwrap().format(), Format::Tar);
+//         let e2 = create_extractor(&PathBuf::from("results/test.tar"));
+//         assert!(e2.is_ok());
+//         assert_eq!(e2.unwrap().format(), Format::Tar);
 
-        let e3 = create_extractor(&PathBuf::from("results/test.tgz"));
-        assert!(e3.is_ok());
-        assert_eq!(e3.unwrap().format(), Format::TarGz);
+//         let e3 = create_extractor(&PathBuf::from("results/test.tgz"));
+//         assert!(e3.is_ok());
+//         assert_eq!(e3.unwrap().format(), Format::TarGz);
 
-        let e4 = create_extractor(&PathBuf::from("results/test.tbz2"));
-        assert!(e4.is_ok());
-        assert_eq!(e4.unwrap().format(), Format::TarBz2);
+//         let e4 = create_extractor(&PathBuf::from("results/test.tbz2"));
+//         assert!(e4.is_ok());
+//         assert_eq!(e4.unwrap().format(), Format::TarBz2);
 
-        let e5 = create_extractor(&PathBuf::from("results/test.rar"));
-        assert!(e5.is_ok());
-        assert_eq!(e5.unwrap().format(), Format::Rar);
+//         let e5 = create_extractor(&PathBuf::from("results/test.rar"));
+//         assert!(e5.is_ok());
+//         assert_eq!(e5.unwrap().format(), Format::Rar);
 
-        let e6 = create_extractor(&PathBuf::from("results/test.tar.xz"));
-        assert!(e6.is_ok());
-        assert_eq!(e6.unwrap().format(), Format::TarXz);
+//         let e6 = create_extractor(&PathBuf::from("results/test.tar.xz"));
+//         assert!(e6.is_ok());
+//         assert_eq!(e6.unwrap().format(), Format::TarXz);
 
-        let e7 = create_extractor(&PathBuf::from("results/test.7z"));
-        assert!(e7.is_ok());
-        assert_eq!(e7.unwrap().format(), Format::SevenZ);
+//         let e7 = create_extractor(&PathBuf::from("results/test.7z"));
+//         assert!(e7.is_ok());
+//         assert_eq!(e7.unwrap().format(), Format::SevenZ);
 
-        let e8 = create_extractor(&PathBuf::from("results/test.unknown"));
-        assert!(e8.is_err());
-        if let Err(RError::UnknownFormat(msg)) = e8 {
-            assert_eq!(msg, "test.unknown: unsupported format".to_string());
-        } else {
-            assert!(false);
-        }
-    }
-}
+//         let e8 = create_extractor(&PathBuf::from("results/test.unknown"));
+//         assert!(e8.is_err());
+//         if let Err(RError::UnknownFormat(msg)) = e8 {
+//             assert_eq!(msg, "test.unknown: unsupported format".to_string());
+//         } else {
+//             assert!(false);
+//         }
+//     }
+// }

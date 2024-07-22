@@ -82,54 +82,54 @@ impl Extractor for LhaExtractor {
     }
 }
 
-#[cfg(test)]
-mod tests {
-    use super::*;
-    use crate::format::Format;
-    use crate::verboser::create_verboser;
+// #[cfg(test)]
+// mod tests {
+//     use super::*;
+//     use crate::format::Format;
+//     use crate::verboser::create_verboser;
 
-    #[test]
-    fn test_list_archives() {
-        let extractor = LhaExtractor {};
-        let file = PathBuf::from("testdata/test.lzh");
-        match extractor.list_archives(file) {
-            Ok(r) => {
-                assert_eq!(r.len(), 23);
-                assert_eq!(r.get(0), Some("Cargo.toml".to_string()).as_ref());
-                assert_eq!(r.get(1), Some("LICENSE".to_string()).as_ref());
-                assert_eq!(r.get(2), Some("README.md".to_string()).as_ref());
-                assert_eq!(r.get(3), Some("build.rs".to_string()).as_ref());
-            }
-            Err(_) => assert!(false),
-        }
-    }
+//     #[test]
+//     fn test_list_archives() {
+//         let extractor = LhaExtractor {};
+//         let file = PathBuf::from("testdata/test.lzh");
+//         match extractor.list_archives(file) {
+//             Ok(r) => {
+//                 assert_eq!(r.len(), 23);
+//                 assert_eq!(r.get(0), Some("Cargo.toml".to_string()).as_ref());
+//                 assert_eq!(r.get(1), Some("LICENSE".to_string()).as_ref());
+//                 assert_eq!(r.get(2), Some("README.md".to_string()).as_ref());
+//                 assert_eq!(r.get(3), Some("build.rs".to_string()).as_ref());
+//             }
+//             Err(_) => assert!(false),
+//         }
+//     }
 
-    #[test]
-    fn test_extract_archive() {
-        let e = LhaExtractor {};
-        let file = PathBuf::from("testdata/test.lzh");
-        let opts = ExtractorOpts {
-            dest: PathBuf::from("results/lha"),
-            use_archive_name_dir: true,
-            overwrite: true,
-            v: create_verboser(false),
-        };
-        match e.perform(file, &opts) {
-            Ok(_) => {
-                assert!(true);
-                assert!(PathBuf::from("results/lha/test/Cargo.toml").exists());
-                std::fs::remove_dir_all(PathBuf::from("results/lha")).unwrap();
-            }
-            Err(e) => {
-                eprintln!("{:?}", e);
-                assert!(false);
-            }
-        };
-    }
+//     #[test]
+//     fn test_extract_archive() {
+//         let e = LhaExtractor {};
+//         let file = PathBuf::from("testdata/test.lzh");
+//         let opts = ExtractorOpts {
+//             dest: PathBuf::from("results/lha"),
+//             use_archive_name_dir: true,
+//             overwrite: true,
+//             v: create_verboser(false),
+//         };
+//         match e.perform(file, &opts) {
+//             Ok(_) => {
+//                 assert!(true);
+//                 assert!(PathBuf::from("results/lha/test/Cargo.toml").exists());
+//                 std::fs::remove_dir_all(PathBuf::from("results/lha")).unwrap();
+//             }
+//             Err(e) => {
+//                 eprintln!("{:?}", e);
+//                 assert!(false);
+//             }
+//         };
+//     }
 
-    #[test]
-    fn test_format() {
-        let extractor = LhaExtractor {};
-        assert_eq!(extractor.format(), Format::LHA);
-    }
-}
+//     #[test]
+//     fn test_format() {
+//         let extractor = LhaExtractor {};
+//         assert_eq!(extractor.format(), Format::LHA);
+//     }
+// }

@@ -130,7 +130,8 @@ fn main() -> Result<()> {
                 RError::IO(e) => println!("IO error: {}", e),
                 RError::IOError(e) => println!("IO error: {}", e),
                 RError::Archiver(s) => println!("Archive error: {}", s),
-                //RError::ArchiverError(e) => write!(f, "Archiver error: {}", e),
+                RError::ArchiverError(s) => println!("Archiver  error: {}", s),
+                //RError::ArchiverError(s) => println!("Archive error: {}", s),
                 RError::UnknownFormat(f) => println!("{}: unknown format", f),
                 RError::ArchiverError(s) => println!("Archive error: {}", s),
                 RError::UnsupportedFormat(f) => println!("{}: unsupported format", f),
@@ -143,24 +144,6 @@ fn main() -> Result<()> {
     }
 }
 
-// ファイル作成の後ににしていされたファイル名のファイルが存在するかの確認(没)
-// pub fn create_file_and_get_destination(opts: &ArchiverOpts) -> Result<File> {
-//     let p = opts.dest.as_path();
-//     if p.exists() {
-//         if p.is_file() && !opts.overwrite {
-//             return Err(RError::FileExists(opts.dest.clone()));
-//         }
-//     } else {
-//         if let Some(parent) = p.parent() {
-//             if !parent.exists() {
-//                 if let Err(e) = create_dir_all(parent) {
-//                     return Err(RError::IOError(e));
-//                 }
-//             }
-//         }
-//     }
-//     File::create(opts.dest.as_path()).map_err(RError::IOError)
-// }
 
 
 #[cfg(test)]

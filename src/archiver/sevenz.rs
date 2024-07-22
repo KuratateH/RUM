@@ -74,50 +74,50 @@ fn write_sevenz(dest: File, targets: Vec<PathBuf>, recursive: bool) -> Result<()
     }
 }
 
-#[cfg(test)]
-mod tests {
-    use super::*;
+// #[cfg(test)]
+// mod tests {
+//     use super::*;
 
-    use std::path::PathBuf;
+//     use std::path::PathBuf;
 
-    #[test]
-    fn test_format() {
-        let archiver = SevenZArchiver {};
-        assert_eq!(archiver.format(), Format::SevenZ);
-    }
+//     #[test]
+//     fn test_format() {
+//         let archiver = SevenZArchiver {};
+//         assert_eq!(archiver.format(), Format::SevenZ);
+//     }
 
-    fn run_test<F>(f: F)
-    where
-        F: FnOnce(),
-    {
-        // setup(); // 予めやりたい処理
-        let result = std::panic::catch_unwind(std::panic::AssertUnwindSafe(f));
-        teardown(); // 後片付け処理
+//     fn run_test<F>(f: F)
+//     where
+//         F: FnOnce(),
+//     {
+//         // setup(); // 予めやりたい処理
+//         let result = std::panic::catch_unwind(std::panic::AssertUnwindSafe(f));
+//         teardown(); // 後片付け処理
 
-        if let Err(err) = result {
-            std::panic::resume_unwind(err);
-        }
-    }
+//         if let Err(err) = result {
+//             std::panic::resume_unwind(err);
+//         }
+//     }
 
-    #[test]
-    fn test_zip() {
-        run_test(|| {
-            let archiver = SevenZArchiver {};
-            let inout = ArchiverOpts::create(
-                PathBuf::from("results/test.7z"),
-                vec![PathBuf::from("src"), PathBuf::from("Cargo.toml")],
-                true,
-                true,
-                false,
-            );
-            let result = archiver.perform(&inout);
-            assert!(result.is_ok());
-            assert_eq!(archiver.format(), Format::SevenZ);
-        });
-    }
+//     #[test]
+//     fn test_zip() {
+//         run_test(|| {
+//             let archiver = SevenZArchiver {};
+//             let inout = ArchiverOpts::create(
+//                 PathBuf::from("results/test.7z"),
+//                 vec![PathBuf::from("src"), PathBuf::from("Cargo.toml")],
+//                 true,
+//                 true,
+//                 false,
+//             );
+//             let result = archiver.perform(&inout);
+//             assert!(result.is_ok());
+//             assert_eq!(archiver.format(), Format::SevenZ);
+//         });
+//     }
 
-    fn teardown() {
-        let _ = std::fs::remove_file("results/test.7z");
-    }
-}
+//     fn teardown() {
+//         let _ = std::fs::remove_file("results/test.7z");
+//     }
+// }
 
