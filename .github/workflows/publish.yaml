@@ -21,6 +21,7 @@ jobs:
         run: |
           echo "GITHUB_HEAD_REF: $GITHUB_HEAD_REF (${GITHUB_HEAD_REF##*/v})"
           echo "tag=${GITHUB_HEAD_REF##*/v}" >> $GITHUB_OUTPUT
+          
 
       - name: Create release
         id: create_release
