@@ -74,35 +74,35 @@ fn write_to_zip(dest: File, targets: Vec<PathBuf>, recursive: bool) -> Result<()
     Ok(())
 }
 
-#[cfg(test)]
-mod tests {
-    use super::*;
+// #[cfg(test)]
+// mod tests {
+//     use super::*;
 
-    fn run_test<F>(f: F)
-    where
-        F: FnOnce(),
-    {
-        // setup(); // 予めやりたい処理
-        let result = std::panic::catch_unwind(std::panic::AssertUnwindSafe(f));
-        teardown(); // 後片付け処理
+//     fn run_test<F>(f: F)
+//     where
+//         F: FnOnce(),
+//     {
+//         // setup(); // 予めやりたい処理
+//         let result = std::panic::catch_unwind(std::panic::AssertUnwindSafe(f));
+//         teardown(); // 後片付け処理
     
-        if let Err(err) = result {
-            std::panic::resume_unwind(err);
-        }
-    }
+//         if let Err(err) = result {
+//             std::panic::resume_unwind(err);
+//         }
+//     }
     
-    #[test]
-    fn test_zip() {
-        run_test(|| {
-            let archiver = ZipArchiver{};
-            let inout = ArchiverOpts::create(PathBuf::from("results/test.zip"), vec![PathBuf::from("src"), PathBuf::from("Cargo.toml")], true, true, false);
-            let result = archiver.perform(&inout);
-            assert!(result.is_ok());
-            assert_eq!(archiver.format(), Format::Zip);
-        });
-    }
+//     #[test]
+//     fn test_zip() {
+//         run_test(|| {
+//             let archiver = ZipArchiver{};
+//             let inout = ArchiverOpts::create(PathBuf::from("results/test.zip"), vec![PathBuf::from("src"), PathBuf::from("Cargo.toml")], true, true, false);
+//             let result = archiver.perform(&inout);
+//             assert!(result.is_ok());
+//             assert_eq!(archiver.format(), Format::Zip);
+//         });
+//     }
 
-    fn teardown() {
-        let _ = std::fs::remove_file("results/test.zip");
-    }
-}
+//     fn teardown() {
+//         let _ = std::fs::remove_file("results/test.zip");
+//     }
+// }

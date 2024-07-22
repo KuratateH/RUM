@@ -143,25 +143,7 @@ fn main() -> Result<()> {
         }
     }
 }
-
-// ファイル作成の後ににしていされたファイル名のファイルが存在するかの確認(没)
-// pub fn create_file_and_get_destination(opts: &ArchiverOpts) -> Result<File> {
-//     let p = opts.dest.as_path();
-//     if p.exists() {
-//         if p.is_file() && !opts.overwrite {
-//             return Err(RError::FileExists(opts.dest.clone()));
-//         }
-//     } else {
-//         if let Some(parent) = p.parent() {
-//             if !parent.exists() {
-//                 if let Err(e) = create_dir_all(parent) {
-//                     return Err(RError::IOError(e));
-//                 }
-//             }
-//         }
-//     }
-//     File::create(opts.dest.as_path()).map_err(RError::IOError)
-// }
+}
 
 
 #[cfg(test)]
