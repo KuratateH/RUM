@@ -13,7 +13,7 @@ mod tar;
 mod zip;
 mod cab;
 
-use crate::extractor::cab::CABExtractor;
+//use crate::extractor::cab::CABExtractor;
 
 pub struct ExtractorOpts {
     pub dest: PathBuf,

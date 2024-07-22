@@ -1,12 +1,12 @@
 use std::fs::File;
 //use std::io::{BufReader, BufWriter, Read, Write};
-use std::io::{BufReader, Write};
+use std::io::BufReader;
 use std::path::PathBuf;
 use cab::Cabinet;
 use crate::cli::{Result, RError};
 use crate::extractor::{Extractor, ExtractorOpts};
 use crate::format::Format;
-//use std::io;
+use std::io;
 
 pub struct CABExtractor {}
 

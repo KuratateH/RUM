@@ -1,15 +1,17 @@
-// use crate::format::Format;
+use crate::format::Format;
 // use crate::archiver::{Archiver, ArchiverOpts};
 // use crate::cli::{RError, Result};
 // use std::fs::File;
-// use std::io::BufWriter;
+use std::io::BufWriter;
 // use cab::{CabinetBuilder, CompressionType};
 use std::fs::File;
-use std::io::Write;
-use std::path::PathBuf;
+//use std::io::Write;
+//use std::path::PathBuf;
 use crate::cli::{Result, RError};
 use crate::archiver::ArchiverOpts;
-
+use crate::archiver::Archiver;
+use cab::CabinetBuilder;
+use cab::CompressionType;
 
 
 
