@@ -52,6 +52,7 @@
 # ENTRYPOINT [ "opt/rum/rum"]
 
 
+
 WORKDIR /home/rum
 
 RUN apk add --no-cache curl tar gzip \
