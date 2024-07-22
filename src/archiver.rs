@@ -6,6 +6,7 @@ use crate::archiver::rar::RarArchiver;
 use crate::archiver::sevenz::SevenZArchiver;
 use crate::archiver::tar::{TarArchiver, TarBz2Archiver, TarGzArchiver, TarXzArchiver, TarZstdArchiver};
 use crate::archiver::zip::ZipArchiver;
+use crate::archiver::cab::CABArchiver;
 use crate::cli::{Result, RError};
 use crate::format::{find_format, Format};
 use crate::verboser::{create_verboser, Verboser};
@@ -17,6 +18,7 @@ mod rar;
 mod sevenz;
 mod tar;
 mod zip;
+mod cab;
 
 pub trait Archiver {
     fn perform(&self, inout: &ArchiverOpts) -> Result<()>;
@@ -37,6 +39,7 @@ pub fn create_archiver(dest: &PathBuf) -> Result<Box<dyn Archiver>> {
                 Format::LHA => Ok(Box::new(LhaArchiver {})),
                 Format::Rar => Ok(Box::new(RarArchiver {})),
                 Format::SevenZ => Ok(Box::new(SevenZArchiver {})),
+                Format::CAB => Ok(Box::new(CABArchiver {})),
                 _ => Err(RError::UnknownFormat(format.to_string())),
             }
         }

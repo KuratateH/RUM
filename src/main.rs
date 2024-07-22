@@ -136,6 +136,7 @@ fn main() -> Result<()> {
                 RError::UnsupportedFormat(f) => println!("{}: unsupported format", f),
                 RError::Fatal(e) => println!("Error: {}", e),
                 RError::Unknown(s) => println!("Unknown error: {}", s),
+                RError::ExtractError(s) => println!("Extract Error: {}", s),
             }
             std::process::exit(1);
         }

@@ -11,6 +11,9 @@ mod rar;
 mod sevenz;
 mod tar;
 mod zip;
+mod cab;
+
+use crate::extractor::cab::CABExtractor;
 
 pub struct ExtractorOpts {
     pub dest: PathBuf,
@@ -67,6 +70,8 @@ pub fn create_extractor(file: &PathBuf) -> Result<Box<dyn Extractor>> {
                 Format::TarZstd => Ok(Box::new(tar::TarZstdExtractor {})),
                 Format::LHA => Ok(Box::new(lha::LhaExtractor {})),
                 Format::SevenZ => Ok(Box::new(sevenz::SevenZExtractor {})),
+                //あとで変える
+                Format::CAB => Ok(Box::new(cab::CABExtractor {})),
                 Format::Unknown(s) => Err(RError::UnknownFormat(format!(
                     "{}: unsupported format",
                     s
