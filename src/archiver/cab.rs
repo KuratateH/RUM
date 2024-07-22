@@ -32,15 +32,14 @@ impl Archiver for CABArchiver {
         for target in targets {
             let target_path = target.as_path();
             if target_path.is_file() {
-                let mut file = File::open(target_path).map_err(RError::IOError)?;
+                //let mut file = File::open(target_path).map_err(RError::IOError)?;
                 builder.add_folder(CompressionType::None).add_file(target_path.to_str().unwrap());
             } else if target_path.is_dir() && opts.recursive {
                 for entry in std::fs::read_dir(target_path).map_err(RError::IOError)? {
                     let entry = entry.map_err(RError::IOError)?;
                     let path = entry.path();
                     if path.is_file() {
-                        let mut file = File::open(&path).map_err(RError::IOError)?;
-                       
+                        //let mut file = File::open(&path).map_err(RError::IOError)?;
                         builder.add_folder(CompressionType::None).add_file(path.to_str().unwrap().to_string());
                     }
                 }

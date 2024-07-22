@@ -72,7 +72,7 @@ pub enum RError {
     FileExists(PathBuf),
     IO(std::io::Error),
     IOError(std::io::Error),
-    Archiver(String),
+    //Archiver(String),
     ArchiverError(String),
     ExtractError(String),
     UnsupportedFormat(String),
