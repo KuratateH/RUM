@@ -28,49 +28,49 @@
 # ENTRYPOINT [ "/opt/rum/rum" ]
 
 
-FROM rust:1-bullseys AS builder
+# FROM rust:1-bullseys AS builder
 
-#ARG VERSION=0.1.0
-ARG TARGETPLATFORM
-#ARG PLATFORM=${TARGETPLATFORM#linux/}
-COPY . . 
-RUN cargo build --releases
+# #ARG VERSION=0.1.0
+# ARG TARGETPLATFORM
+# #ARG PLATFORM=${TARGETPLATFORM#linux/}
+# COPY . . 
+# RUN cargo build --releases
 
-FROM debian:bullseys-slim
-ARG VERSION=0.1.0
-LABEL org.opencontainers.image.source https://github.com/kuratateh/rum ¥
-      org.opencontainers.image.version=${version} ¥
-      org.opencontainers.image.title=rum ¥
-      org.opencontainers.image.description="rum is a simple file transfer tool."
-RUN adduser --disabled-password --disabled-login --home / workdir nonroot ¥
-    && mkdir -p /workdir
-COPY --from=builder /work/rum/target/release/rum /opt/rum/rum
-
-WORKDIR /workdir
-USER nonroot
-
-ENTRYPOINT [ "opt/rum/rum"]
-
-
-# WORKDIR /home/rum
-
-# RUN apk add --no-cache curl tar gzip \
-#  && curl -LO https://github.com/kuratateh/rum/releases/download/v${VERSION}/rum-${VERSION}_linux_${PLATFORM}.tar.gz \
-#  && tar xvfz rum-${VERSION}_linux_${PLATFORM}.tar.gz 
-
-# FROM alpine:3.16
-
+# FROM debian:bullseys-slim
 # ARG VERSION=0.1.0
-
-# LABEL org.opencontainers.image.source https://github.com/kuratateh/rum
-
-# RUN  apk add --no-cache libgcc musl-dev \
-#   && adduser -D nonroot \
-#   && mkdir -p /workdir
-
-# COPY --from=builder /home/rum/rum-${VERSION}/rum /opt/rum/rum
+# LABEL org.opencontainers.image.source https://github.com/kuratateh/rum ¥
+#       org.opencontainers.image.version=${version} ¥
+#       org.opencontainers.image.title=rum ¥
+#       org.opencontainers.image.description="rum is a simple file transfer tool."
+# RUN adduser --disabled-password --disabled-login --home / workdir nonroot ¥
+#     && mkdir -p /workdir
+# COPY --from=builder /work/rum/target/release/rum /opt/rum/rum
 
 # WORKDIR /workdir
 # USER nonroot
 
-# ENTRYPOINT [ "/opt/rum/rum" ]
+# ENTRYPOINT [ "opt/rum/rum"]
+
+
+WORKDIR /home/rum
+
+RUN apk add --no-cache curl tar gzip \
+ && curl -LO https://github.com/kuratateh/rum/releases/download/v${VERSION}/rum-${VERSION}_linux_${PLATFORM}.tar.gz \
+ && tar xvfz rum-${VERSION}_linux_${PLATFORM}.tar.gz 
+
+FROM alpine:3.16
+
+ARG VERSION=0.1.0
+
+LABEL org.opencontainers.image.source https://github.com/kuratateh/rum
+
+RUN  apk add --no-cache libgcc musl-dev \
+  && adduser -D nonroot \
+  && mkdir -p /workdir
+
+COPY --from=builder /home/rum/rum-${VERSION}/rum /opt/rum/rum
+
+WORKDIR /workdir
+USER nonroot
+
+ENTRYPOINT [ "/opt/rum/rum" ]
